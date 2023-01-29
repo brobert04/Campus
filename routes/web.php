@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,5 @@ Route::middleware([
 //RUTELE ADMINULUI/DIRECTORULUI
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function(){
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::resource('users', UserController::class);
 });
