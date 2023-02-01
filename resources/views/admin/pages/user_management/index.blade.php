@@ -19,7 +19,6 @@
                     <th>Gender</th>
                     <th>Phone Number</th>
                     <th>Address</th>
-                    <th>Profile Picture</th>
                     <th>Role</th>
                     <th>Actions</th>
                 </tr>
@@ -34,10 +33,9 @@
                     <td>{{$user->gender}}</td>
                     <td>{{$user->phone}}</td>
                     <td>{{$user->address}}</td>
-                    <td class="text-center"><img src="/storage/profile-photos/users/{{$user->profile_photo_path}}" alt="Profile Image" class="user-avatar" style="max-width:50px; max-height:50px;"></td>
                     <td>{{$user->role}}</td>
                     <td class="text-center">
-                        <a href="#" class="text-primary" style="margin-right: 20px;">
+                        <a href="{{route('users.edit', $user->id)}}" class="text-primary" style="margin-right: 20px;">
                             <i class="fas fa-pen"></i>
                         </a>
                         <a href="#" class="text-danger">
@@ -72,6 +70,29 @@
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
+        setTimeout(()=>{
+            document.getElementById('alert').style.display = 'none';
+        }, 3000);
+
+        @if(session()->has('success'))
+        $(document).Toasts('create', {
+                    class: 'bg-success',
+                    title: 'User management',
+                    autohide: true,
+                    delay: 2500,
+                    body: '{{ session()->get('success') }}'
+        })
+        @endif
+        @if(session()->has('error'))
+        $(document).Toasts('create', {
+                    class: 'bg-danger',
+                    title: 'User management',
+                    autohide: true,
+                    delay: 2500,
+                    body: '{{ session()->get('error') }}'
+        })
+        @endif
     </script>
+
 @endsection
 

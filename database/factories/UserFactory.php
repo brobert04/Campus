@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Laravolt\Avatar\Avatar;
 
 class UserFactory extends Factory
 {
@@ -32,13 +33,12 @@ class UserFactory extends Factory
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
-            'profile_photo_path' => 'user.png',
             'current_team_id' => null,
             'phone' => $this->faker->phoneNumber(),
             'address' => $this->faker->address(),
             'gender' => $this->faker->randomElement(['Male', 'Female']),
-            'role' => $this->faker->randomElement(['Admin', 'Student', 'Teacher', 'Employee']),
-
+            'role' => $this->faker->randomElement(['Admin', 'Teacher', 'Employee', 'Parent']),
+            'birthday' => $this->faker->date(),
         ];
     }
 

@@ -19,12 +19,13 @@
                 <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2">
                     <div class="user-panel">
                         <div class="image">
-                            <img src="{{asset('/backend/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                            <img src="https://ui-avatars.com/api/?background=random&name={{Auth::user()->name}}
+" class="img-circle" alt="User Image">
                         </div>
                     </div>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <h6 class="dropdown-header">{{Auth::user()->name}} | Role</h6>
+                    <h6 class="dropdown-header">{{Auth::user()->name}} | {{Auth::user()->role}}</h6>
                     <button class="dropdown-item" type="button"><a href="#" class="text-dark">Profile</a></button>
                     <button class="dropdown-item" type="button"><a href="#" class="text-dark">Settings</a></button>
                     <div class="dropdown-divider"></div>
@@ -62,3 +63,5 @@
         </li>
     </ul>
 </nav>
+
+{{--{{asset('storage/profile-photos/users/' . str_replace(" ", '', Auth::user()->name) . '.png')}}--}}
