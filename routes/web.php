@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,15 @@ Route::middleware([
     })->name('dashboard');
 });
 
-//RUTELE ADMINULUI/DIRECTORULUI
+//RUTELE ADMINULUI/DIRECTORULUI PENTRU ADAUGARE UTILIZATOR
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum']], function(){
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::resource('users', UserController::class);
+});
+
+//RUTELE PENTRU PROFIL
+Route::group(['prefix' => 'profile', 'middleware' => ['auth:sanctum']], function(){
+    Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/settings', [ProfileController::class, 'settings'])->name('profile.settings');
+    Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
 });

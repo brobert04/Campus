@@ -19,15 +19,16 @@
                 <a class="nav-link" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2">
                     <div class="user-panel">
                         <div class="image">
-                            <img src="https://ui-avatars.com/api/?background=random&name={{Auth::user()->name}}
-" class="img-circle" alt="User Image">
+                            <img
+                                src="{{ (!empty(Auth::user()->image)) ? url('upload/user_images/' .Auth::user()->image) : 'https://ui-avatars.com/api/?background=random&name='.Auth::user()->name }}" class="img-fluid img-circle"
+                            >
                         </div>
                     </div>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <h6 class="dropdown-header">{{Auth::user()->name}} | {{Auth::user()->role}}</h6>
-                    <button class="dropdown-item" type="button"><a href="#" class="text-dark">Profile</a></button>
-                    <button class="dropdown-item" type="button"><a href="#" class="text-dark">Settings</a></button>
+                    <button class="dropdown-item" type="button"><a href="{{route('profile.index')}}" class="text-dark">Profile</a></button>
+                    <button class="dropdown-item" type="button"><a href="{{route('profile.settings')}}" class="text-dark">Settings</a></button>
                     <div class="dropdown-divider"></div>
                     <button class="dropdown-item" type="button"><a href="{{route('admin.logout')}}" class="text-dark">Logout</a></button>
                 </div>

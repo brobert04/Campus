@@ -71,9 +71,11 @@
                     <a href="{{route('password.request')}}">I forgot my password</a>
                 </p>
             @endif
+            @if(\App\Models\User::count() < 0)
             <p class="mb-0">
                 <a href="{{route('register')}}" class="text-center">Register a new account</a>
             </p>
+            @endif
             @error('email')
             <div class="alert alert-danger mt-3 text-center">
                 {{$message}}

@@ -9,7 +9,7 @@
         <div class="card-header">
             <h3 class="card-title">Edit {{$user->name}}'s Information</h3>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body p-3">
             <div class="bs-stepper">
                 <div class="bs-stepper-header" role="tablist">
                     <!-- your steps here -->
@@ -69,7 +69,7 @@
                                         <label>Birth Date</label>
                                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                                             <input type="text" class="form-control datetimepicker-input @error('date') is-invalid @enderror" data-target="#reservationdate"
-                                            id="date" name="date" value="{{$user->birthday}}">
+                                            id="date" name="date" value="{{$user->birthday}}" disabled>
                                             <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                             </div>
@@ -82,7 +82,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="gender">Gender</label>
-                                        <select class="custom-select form-control @error('gender') is-invalid @enderror" id="gender" name="gender" >
+                                        <select class="custom-select form-control @error('gender') is-invalid @enderror" id="gender" name="gender" disabled>
                                             <option class="text-center">-- Select user gender --</option>
                                             <option value="Male" {{ ($user->gender == "Male" ? "selected" : "") }}>Male</option>
                                             <option value="Female" {{ ($user->gender == "Female" ? "selected" : "") }}>Female</option>

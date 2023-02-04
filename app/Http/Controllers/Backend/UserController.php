@@ -49,7 +49,7 @@ class UserController extends Controller
       $user->address = $request->address;
       $user->role = $request->role;
       $user->birthday = $request->date;
-      Avatar::create($request->name)->save(storage_path('app/public/profile-photos/users/' . str_replace(' ', '', $request->name) . '.png'));
+//      Avatar::create($request->name)->save(storage_path('app/public/profile-photos/users/' . str_replace(' ', '', $request->name) . '.png'));
       $user->save();
       return redirect()->route('users.index')->withInput()->with('success', 'User' . ' ' . $request->name . ' ' . 'created successfully!');
     }
@@ -94,8 +94,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->birthday = $request->date;
-        $user->gender = $request->gender;
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->role = $request->role;
@@ -111,6 +109,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('users.index')->withInput()->with('success', 'User' . ' ' . $user->name . ' ' . 'deleted successfully!');
     }
 }

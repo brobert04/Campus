@@ -3,6 +3,7 @@
 @section('custom-css')
     <link rel="stylesheet" href="{{asset('../backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('../backend/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('../backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
 @endsection
 @section('content')
     <div class="card">
@@ -38,9 +39,13 @@
                         <a href="{{route('users.edit', $user->id)}}" class="text-primary" style="margin-right: 20px;">
                             <i class="fas fa-pen"></i>
                         </a>
-                        <a href="#" class="text-danger">
-                            <i class="fas fa-trash"></i>
-                        </a>
+                        <form action="{{route('users.destroy', $user->id)}}" id="delete-form-{{$user->id}}" method="post" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="confirmDelete()" style="background: transparent; border:none;" class="text-danger" id="delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -63,11 +68,12 @@
     <script src="{{asset('../backend/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('../backend/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('../backend/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+    <script src="{{asset('../backend/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
     <script>
         $(function () {
             $("#example1").DataTable({
                 "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                "buttons": ["copy", "csv", "excel", "pdf", "print"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
         setTimeout(()=>{
@@ -92,6 +98,24 @@
                     body: '{{ session()->get('error') }}'
         })
         @endif
+        $(document).on('click', '#delete', function (e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            var dataID = form.data('id');
+            Swal.fire({
+                title: 'Are you sure you want to delete {{$user->name}}?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
     </script>
 
 @endsection

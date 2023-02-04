@@ -9,7 +9,7 @@
         <div class="card-header">
             <h3 class="card-title">Add New User</h3>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body p-3">
             <div class="bs-stepper">
                 <div class="bs-stepper-header" role="tablist">
                     <!-- your steps here -->
